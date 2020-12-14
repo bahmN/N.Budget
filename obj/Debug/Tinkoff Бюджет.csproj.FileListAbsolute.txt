@@ -1,0 +1,35 @@
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Tinkoff Бюджет.exe.config
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Tinkoff Бюджет.exe
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Tinkoff Бюджет.pdb
+D:\cSharp\Tinkoff Бюджет\bin\Debug\BouncyCastle.Crypto.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Google.Protobuf.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\K4os.Compression.LZ4.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\K4os.Hash.xxHash.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\MySql.Data.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Renci.SshNet.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\System.Buffers.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\System.Memory.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\System.Numerics.Vectors.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Ubiety.Dns.Core.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Zstandard.Net.dll
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Google.Protobuf.pdb
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Google.Protobuf.xml
+D:\cSharp\Tinkoff Бюджет\bin\Debug\K4os.Compression.LZ4.xml
+D:\cSharp\Tinkoff Бюджет\bin\Debug\K4os.Compression.LZ4.Streams.xml
+D:\cSharp\Tinkoff Бюджет\bin\Debug\K4os.Hash.xxHash.xml
+D:\cSharp\Tinkoff Бюджет\bin\Debug\MySql.Data.xml
+D:\cSharp\Tinkoff Бюджет\bin\Debug\Renci.SshNet.xml
+D:\cSharp\Tinkoff Бюджет\bin\Debug\System.Buffers.xml
+D:\cSharp\Tinkoff Бюджет\bin\Debug\System.Memory.xml
+D:\cSharp\Tinkoff Бюджет\bin\Debug\System.Numerics.Vectors.xml
+D:\cSharp\Tinkoff Бюджет\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\cSharp\Tinkoff Бюджет\obj\Debug\Tinkoff Бюджет.csprojAssemblyReference.cache
+D:\cSharp\Tinkoff Бюджет\obj\Debug\Tinkoff_Бюджет.Properties.Resources.resources
+D:\cSharp\Tinkoff Бюджет\obj\Debug\Tinkoff Бюджет.csproj.GenerateResource.cache
+D:\cSharp\Tinkoff Бюджет\obj\Debug\Tinkoff Бюджет.csproj.CoreCompileInputs.cache
+D:\cSharp\Tinkoff Бюджет\obj\Debug\Tinkoff Бюджет.csproj.CopyComplete
+D:\cSharp\Tinkoff Бюджет\obj\Debug\Tinkoff Бюджет.exe
+D:\cSharp\Tinkoff Бюджет\obj\Debug\Tinkoff Бюджет.pdb
+D:\cSharp\Tinkoff Бюджет\obj\Debug\Tinkoff_Бюджет.frmMainMenu.resources
