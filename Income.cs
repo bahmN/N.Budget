@@ -11,7 +11,7 @@ namespace Tinkoff_Бюджет
         static public string SumIncome { get; set; }
         public static void SQLRequestIncome()
         {
-            MySqlCommand cAdd = new MySqlCommand("INSERT INTO доход(Наименование, Сумма) VALUES ('"+NameIncome+"', '"+SumIncome+ "₽')",
+            MySqlCommand cAdd = new MySqlCommand("INSERT INTO доход(Наименование, Сумма) VALUES ('"+NameIncome+"', '"+SumIncome+ "')",
                 frmMainMenu.connection);
             cAdd.ExecuteNonQuery();
         }
