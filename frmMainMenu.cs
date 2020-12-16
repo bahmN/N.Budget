@@ -15,21 +15,22 @@ namespace Tinkoff_Бюджет
         }
         static public MySqlConnection connection;
         /*
-         * Param move form
+         * Параметры перемещения
          */
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hwnd, int wmsg, int wparam, int lparam);
-        //Func. move form
+        // Функция передачи данных параметров(само действие перемешения)
         private void panelUp_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
-
-
+        /*
+         * Закрыть приложение
+         */
         private void bttnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -42,9 +43,15 @@ namespace Tinkoff_Бюджет
             bttnReload_Click(sender, e);
 
             panelYellow.Width = 185;
-            panelYellow.Height = 55;            
+            panelYellow.Height = 55;
+
+            dateTimeP.Value = DateTime.Now;
+            dateTimeP.MaxDate = DateTime.Now;
         }
 
+        /*
+         * Отобразить бд(обновить)
+         */
         private void bttnReload_Click(object sender, EventArgs e)
         {
             MySqlDataAdapter daIncome = new MySqlDataAdapter("SELECT * FROM доход", connection);
@@ -72,49 +79,267 @@ namespace Tinkoff_Бюджет
             dataTableExpenses.RowHeadersVisible = false; // Hide the display of the left column
             dataTableExpenses.AllowUserToAddRows = false; // Hide the display of the bottom column
             dataTableExpenses.Columns[0].Visible = false;
-            dataTableOExpenses.Columns[3].Visible = false;
-        }
-
-        private void bttnAdd_Click(object sender, EventArgs e)
-        {
-            panelYellow.Width = 225;
-            panelYellow.Height = 165;            
+            dataTableExpenses.Columns[3].Visible = false;
         }
 
         /*
-         *  Choose radioButton
+         * События добавить/изменить/удалить
+         */
+        //Добавить
+        private void bttnAdd_Click(object sender, EventArgs e)
+        {
+            gBox.Visible = true;
+            panelYellow.Width = 225;
+            panelYellow.Height = 180;
+            labelChoose.Text = "Что требуется добавить?";
+        }
+
+        //Изменить
+        private void bttnEdit_Click(object sender, EventArgs e)
+        {
+            gBox.Visible = false;
+            panelYellow.Width = 580;
+            panelYellow.Height = 180;
+            labelAdd.Text = "Изменить";
+
+            if (dataTableIncome.SelectedRows.Count == 1) {
+                tbName.Text = dataTableIncome.SelectedRows[0].Cells[1].Value.ToString();
+                tbSum.Text = dataTableIncome.SelectedRows[0].Cells[2].Value.ToString();
+
+                labelDate.Visible = false;
+                dateTimeP.Visible = false;
+            }
+            else if (dataTableOExpenses.SelectedRows.Count == 1) {
+                tbName.Text = dataTableOExpenses.SelectedRows[0].Cells[1].Value.ToString();
+                tbSum.Text = dataTableOExpenses.SelectedRows[0].Cells[2].Value.ToString();
+
+                labelDate.Visible = false;
+                dateTimeP.Visible = false;
+            }
+            else if (dataTableExpenses.SelectedRows.Count == 1) {
+                tbName.Text = dataTableExpenses.SelectedRows[0].Cells[1].Value.ToString();
+                tbSum.Text = dataTableExpenses.SelectedRows[0].Cells[2].Value.ToString();
+            }
+        }
+
+        //Удалить
+        private void bttnDelete_Click(object sender, EventArgs e)
+        {
+            if(dataTableIncome.SelectedRows.Count == 1) {
+                MySqlCommand cDel = new MySqlCommand("DELETE FROM доход WHERE `"+ dataTableIncome.Columns[0].HeaderText + "` = '" + dataTableIncome.SelectedRows[0].Cells[0].Value.ToString() + "'", connection);
+                cDel.ExecuteNonQuery();
+                bttnReload_Click(sender, e);
+            }
+            else if (dataTableOExpenses.SelectedRows.Count == 1) {
+                MySqlCommand cDel = new MySqlCommand("DELETE FROM траты WHERE `" + dataTableOExpenses.Columns[0].HeaderText + "` = '" + dataTableOExpenses.SelectedRows[0].Cells[0].Value.ToString() + "'", connection);
+                cDel.ExecuteNonQuery();
+                bttnReload_Click(sender, e);
+            }
+            else if (dataTableExpenses.SelectedRows.Count == 1) {
+                MySqlCommand cDel = new MySqlCommand("DELETE FROM траты WHERE `" + dataTableExpenses.Columns[0].HeaderText + "` = '" + dataTableExpenses.SelectedRows[0].Cells[0].Value.ToString() + "'", connection);
+                cDel.ExecuteNonQuery();
+                bttnReload_Click(sender, e);
+            }
+        }
+
+        /*
+         *  События при выборе radioButton
          */
         private void radioBttnIncome_CheckedChanged(object sender, EventArgs e)
         {
-            gBox.Width = 655;
+            gBox.Width = 200;
             gBox.Height = 150;
-            gBox.Text = "Добавить доход";
             gBox.Location = new Point(15, 9);
 
-            panelYellow.Width = 675;
-            panelYellow.Height = 165;
+            panelYellow.Width = 580;
+            panelYellow.Height = 180;
+
+            labelAdd.Text = "Добавить";
+            labelAdd.Left = ( gBoxAdd.Width - labelAdd.Width ) / 2;
+
+            labelDate.Visible = false;
+            dateTimeP.Visible = false;
+
+            bttnRollUp.Visible = false;
         }
 
         private void bttnOExpenses_CheckedChanged(object sender, EventArgs e)
         {
-            gBox.Width = 655;
+            gBox.Width = 200;
             gBox.Height = 150;
-            gBox.Text = "Добавить обязательные расходы";
             gBox.Location = new Point(15, 9);
 
-            panelYellow.Width = 675;
-            panelYellow.Height = 165;
+            panelYellow.Width = 580;
+            panelYellow.Height = 180;
+
+            labelAdd.Text = "Добавить";
+            labelAdd.Left = ( gBoxAdd.Width - labelAdd.Width ) / 2;
+
+            labelDate.Visible = false;
+            dateTimeP.Visible = false;
+
+            bttnRollUp.Visible = false;
         }
 
         private void bttnExpenses_CheckedChanged(object sender, EventArgs e)
         {
-            gBox.Width = 655;
+            gBox.Width = 200;
             gBox.Height = 150;
-            gBox.Text = "Добавить расходы";
             gBox.Location = new Point(15, 9);
 
-            panelYellow.Width = 675;
-            panelYellow.Height = 165;
+            panelYellow.Width = 580;
+            panelYellow.Height = 180;
+
+            labelAdd.Text = "Добавить";
+            labelAdd.Left = ( gBoxAdd.Width - labelAdd.Width ) / 2;
+
+            labelDate.Visible = true;
+            dateTimeP.Visible = true;
+
+            bttnRollUp.Visible = false;
+        }
+
+        /*
+         * Отменить внесение данных
+         */
+        private void bttnCancel_Click(object sender, EventArgs e)
+        {
+            gBox.Location = new Point(15, 50);
+
+            panelYellow.Width = 225;
+            panelYellow.Height = 180;
+
+            bttnRollUp.Visible = true;
+            if (labelAdd.Text == "Изменить") {
+                panelYellow.Width = 185;
+                panelYellow.Height = 55;
+            }
+        }
+
+        /*
+         * Принять внесение данных в БД
+         */
+        private void bttnRollUp_Click(object sender, EventArgs e)
+        {
+            panelYellow.Width = 185;
+            panelYellow.Height = 55;
+        }
+
+        /*
+         * Принять внесение данных в БД
+         */
+        private void bttnConfirm_Click(object sender, EventArgs e)
+        {
+            if (labelAdd.Text == "Добавить") {
+                if (radioBttnIncome.Checked == true) {
+                    Income.ConditionIncome = "Добавить";
+                    Income.NameIncome = tbName.Text;
+                    Income.SumIncome = tbSum.Text;
+                    Income.SQLRequestIncome();
+
+                    panelYellow.Width = 185;
+                    panelYellow.Height = 55;
+                    gBox.Location = new Point(15, 50);
+
+                    bttnReload_Click(sender, e);
+                }
+                else if (radioBttnOExpenses.Checked == true) {
+                    OExpenses.ConditionOExpenses = "Добавить";
+                    OExpenses.NameOExpenses = tbName.Text;
+                    OExpenses.SumOExpenses = tbSum.Text;
+                    OExpenses.SQLRequestOExpenses();
+
+                    panelYellow.Width = 185;
+                    panelYellow.Height = 55;
+                    gBox.Location = new Point(15, 50);
+
+                    bttnReload_Click(sender, e);
+                }
+                else if (radioBttnExpenses.Checked == true) {
+                    Expenses.ConditionExpenses = "Добавить";
+                    Expenses.NameExpenses = tbName.Text;
+                    Expenses.SumExpenses = tbSum.Text;
+                    Expenses.DateExpenses = dateTimeP.Text;
+                    Expenses.SQLRequestExpenses();
+
+                    panelYellow.Width = 185;
+                    panelYellow.Height = 55;
+
+                    bttnReload_Click(sender, e);
+                }                
+            }
+            else if(labelAdd.Text == "Изменить") {
+                if (dataTableIncome.SelectedRows.Count == 1) {
+                    Income.IDIncome = dataTableIncome.SelectedRows[0].Cells[0].Value.ToString();
+                    Income.NameIncome = tbName.Text;
+                    Income.SumIncome = tbSum.Text;
+                    Income.SQLRequestIncome();
+
+                    panelYellow.Width = 185;
+                    panelYellow.Height = 55;
+                    gBox.Location = new Point(15, 50);
+
+                    bttnReload_Click(sender, e);
+                }
+                else if (dataTableOExpenses.SelectedRows.Count == 1) {
+                    OExpenses.IDOExpenses = dataTableOExpenses.SelectedRows[0].Cells[0].Value.ToString();
+                    OExpenses.NameOExpenses = tbName.Text;
+                    OExpenses.SumOExpenses = tbSum.Text;
+                    OExpenses.SQLRequestOExpenses();
+
+                    panelYellow.Width = 185;
+                    panelYellow.Height = 55;
+                    gBox.Location = new Point(15, 50);
+
+                    bttnReload_Click(sender, e);
+                }
+                else if (dataTableExpenses.SelectedRows.Count == 1) {
+                    Expenses.IDExpenses = dataTableExpenses.SelectedRows[0].Cells[0].Value.ToString();
+                    Expenses.NameExpenses = tbName.Text;
+                    Expenses.SumExpenses = tbSum.Text;
+                    Expenses.DateExpenses = dateTimeP.Value.ToString("yyyy-MM-dd");
+                    Expenses.SQLRequestExpenses();
+
+                    panelYellow.Width = 185;
+                    panelYellow.Height = 55;
+                    gBox.Location = new Point(15, 50);
+
+                    bttnReload_Click(sender, e);
+                }
+            }
+        }
+
+        /*
+         * Выделение строк в таблице
+         */
+        private void dataTableIncome_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try {
+                dataTableIncome.Rows[e.RowIndex].Selected = true;
+                dataTableOExpenses.Rows[e.RowIndex].Selected = false;
+                dataTableExpenses.Rows[e.RowIndex].Selected = false;
+            }
+            catch { }
+        }
+
+        private void dataTableOExpenses_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try {
+                dataTableIncome.Rows[e.RowIndex].Selected = false;
+                dataTableOExpenses.Rows[e.RowIndex].Selected = true;
+                dataTableExpenses.Rows[e.RowIndex].Selected = false;
+            }
+            catch { }
+        }
+
+        private void dataTableExpenses_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try {
+                dataTableIncome.Rows[e.RowIndex].Selected = false;
+                dataTableOExpenses.Rows[e.RowIndex].Selected = false;
+                dataTableExpenses.Rows[e.RowIndex].Selected = true;
+            }
+            catch { }
         }
     }
 }

@@ -97,12 +97,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Expenses.cs" />
+    <Compile Include="OExpenses.cs" />
     <Compile Include="frmMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMainMenu.Designer.cs">
       <DependentUpon>frmMainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Income.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMainMenu.resx">
