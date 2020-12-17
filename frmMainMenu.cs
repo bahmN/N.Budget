@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -62,10 +63,6 @@ namespace Tinkoff_Бюджет
             dataTableIncome.AllowUserToAddRows = false; // Hide the display of the bottom column
             dataTableIncome.Columns[0].Visible = false;
 
-            //Вывод суммы дохода в label 
-            MySqlCommand cSumI = new MySqlCommand("SELECT SUM(Сумма) FROM доход", connection);
-            object sumIObj = cSumI.ExecuteScalar();
-            labelTotalInNumb.Text = sumIObj.ToString() + " ₽";
 
             MySqlDataAdapter daOExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Обязательные'", connection);
             DataTable dtOExpenses = new DataTable();
@@ -77,10 +74,7 @@ namespace Tinkoff_Бюджет
             dataTableOExpenses.Columns[3].Visible = false;
             dataTableOExpenses.Columns[4].Visible = false;
 
-            //Вывод суммы обязательных трат в label
-            MySqlCommand cSumOE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE `Вид трат`= 'Обязательные'", connection);
-            object sumOEObj = cSumOE.ExecuteScalar();
-            labelTotalOENumber.Text = sumOEObj.ToString() + " ₽";
+           
 
             MySqlDataAdapter daIExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Необязательные'", connection);
             DataTable dtExpenses = new DataTable();
@@ -90,6 +84,33 @@ namespace Tinkoff_Бюджет
             dataTableExpenses.AllowUserToAddRows = false; // Hide the display of the bottom column
             dataTableExpenses.Columns[0].Visible = false;
             dataTableExpenses.Columns[3].Visible = false;
+
+            //Вывод суммы дохода в label 
+            MySqlCommand cSumI = new MySqlCommand("SELECT SUM(Сумма) FROM доход", connection);
+            object sumIObj = cSumI.ExecuteScalar();
+            string sumI = sumIObj.ToString(); //Перменная, хранящая сумму дохода
+            labelTotalInNumb.Text = sumI;
+
+            //Вывод суммы обязательных трат в label
+            MySqlCommand cSumOE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE `Вид трат`= 'Обязательные'", connection);
+            object sumOEObj = cSumOE.ExecuteScalar();
+            string sumOE = sumOEObj.ToString(); //Переменная, хранящая сумму обязательных трат
+            labelTotalOENumber.Text = sumOE;            
+
+            //Вывод суммы свободных денег в label
+            float sumFreeMoney = float.Parse(sumI) - float.Parse(sumOE);
+            labelOEDNumber.Text = sumFreeMoney.ToString();
+
+            //Вывод суммы остатка в label
+            MySqlCommand cSumE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE `Вид трат`= 'Необязательные'", connection);
+            object sumEObj = cSumE.ExecuteScalar();
+            string sumE = sumEObj.ToString(); //Переменная, хранящая сумму обязательных трат
+            float sumRem = sumFreeMoney - float.Parse(sumE);
+            labelRemainderNumber.Text = sumRem.ToString();
+
+            //Сортировка повседневных трат по дате
+            dataTableExpenses.Sort(dataTableExpenses.Columns[3], ListSortDirection.Ascending);
+
         }
 
         /*
@@ -161,6 +182,25 @@ namespace Tinkoff_Бюджет
                 bttnReload_Click(sender, e);
             }
         }
+        //Обработчик нажатия кнопок на клавиатуре
+        private void dataTableIncome_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete) {
+                bttnDelete_Click(sender, e);
+            }
+        }
+        private void dataTableOExpenses_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete) {
+                bttnDelete_Click(sender, e);
+            }
+        }
+        private void dataTableExpenses_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete) {
+                bttnDelete_Click(sender, e);
+            }
+        }
 
         /*
          *  События при выборе radioButton
@@ -224,6 +264,13 @@ namespace Tinkoff_Бюджет
          */
         private void bttnCancel_Click(object sender, EventArgs e)
         {
+            tbName.Text = default;
+            tbSum.Text = default;
+
+            radioBttnIncome = default;
+            radioBttnOExpenses.Checked = default;
+            radioBttnExpenses.Checked = default;
+
             gBox.Location = new Point(15, 50);
 
             panelYellow.Width = 225;
@@ -233,18 +280,11 @@ namespace Tinkoff_Бюджет
             if (labelAdd.Text == "Изменить") {
                 panelYellow.Width = 185;
                 panelYellow.Height = 55;
-            }
-
-            tbName.Text = default;
-            tbSum.Text = default;
-
-            radioBttnIncome = default;
-            radioBttnOExpenses.Checked = default;
-            radioBttnExpenses.Checked = default;
+            }            
         }
 
         /*
-         * Принять внесение данных в БД
+         * Свернуть gBox
          */
         private void bttnRollUp_Click(object sender, EventArgs e)
         {
@@ -369,5 +409,7 @@ namespace Tinkoff_Бюджет
             }
             catch { }
         }
+
+        
     }
 }
