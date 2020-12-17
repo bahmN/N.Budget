@@ -62,6 +62,11 @@ namespace Tinkoff_Бюджет
             dataTableIncome.AllowUserToAddRows = false; // Hide the display of the bottom column
             dataTableIncome.Columns[0].Visible = false;
 
+            //Вывод суммы дохода в label 
+            MySqlCommand cSumI = new MySqlCommand("SELECT SUM(Сумма) FROM доход", connection);
+            object sumIObj = cSumI.ExecuteScalar();
+            labelTotalInNumb.Text = sumIObj.ToString() + " ₽";
+
             MySqlDataAdapter daOExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Обязательные'", connection);
             DataTable dtOExpenses = new DataTable();
             daOExpenses.Fill(dtOExpenses);
@@ -71,6 +76,11 @@ namespace Tinkoff_Бюджет
             dataTableOExpenses.Columns[0].Visible = false;
             dataTableOExpenses.Columns[3].Visible = false;
             dataTableOExpenses.Columns[4].Visible = false;
+
+            //Вывод суммы обязательных трат в label
+            MySqlCommand cSumOE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE `Вид трат`= 'Обязательные'", connection);
+            object sumOEObj = cSumOE.ExecuteScalar();
+            labelTotalOENumber.Text = sumOEObj.ToString() + " ₽";
 
             MySqlDataAdapter daIExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Необязательные'", connection);
             DataTable dtExpenses = new DataTable();
@@ -92,6 +102,13 @@ namespace Tinkoff_Бюджет
             panelYellow.Width = 225;
             panelYellow.Height = 180;
             labelChoose.Text = "Что требуется добавить?";
+
+            tbName.Text = default;
+            tbSum.Text = default;
+
+            radioBttnIncome.Checked = default;
+            radioBttnOExpenses.Checked = default;
+            radioBttnExpenses.Checked = default;
         }
 
         //Изменить
@@ -101,6 +118,9 @@ namespace Tinkoff_Бюджет
             panelYellow.Width = 580;
             panelYellow.Height = 180;
             labelAdd.Text = "Изменить";
+
+            tbName.Text = default;
+            tbSum.Text = default;
 
             if (dataTableIncome.SelectedRows.Count == 1) {
                 tbName.Text = dataTableIncome.SelectedRows[0].Cells[1].Value.ToString();
@@ -125,8 +145,8 @@ namespace Tinkoff_Бюджет
         //Удалить
         private void bttnDelete_Click(object sender, EventArgs e)
         {
-            if(dataTableIncome.SelectedRows.Count == 1) {
-                MySqlCommand cDel = new MySqlCommand("DELETE FROM доход WHERE `"+ dataTableIncome.Columns[0].HeaderText + "` = '" + dataTableIncome.SelectedRows[0].Cells[0].Value.ToString() + "'", connection);
+            if (dataTableIncome.SelectedRows.Count == 1) {
+                MySqlCommand cDel = new MySqlCommand("DELETE FROM доход WHERE `" + dataTableIncome.Columns[0].HeaderText + "` = '" + dataTableIncome.SelectedRows[0].Cells[0].Value.ToString() + "'", connection);
                 cDel.ExecuteNonQuery();
                 bttnReload_Click(sender, e);
             }
@@ -214,6 +234,13 @@ namespace Tinkoff_Бюджет
                 panelYellow.Width = 185;
                 panelYellow.Height = 55;
             }
+
+            tbName.Text = default;
+            tbSum.Text = default;
+
+            radioBttnIncome = default;
+            radioBttnOExpenses.Checked = default;
+            radioBttnExpenses.Checked = default;
         }
 
         /*
@@ -264,11 +291,12 @@ namespace Tinkoff_Бюджет
 
                     panelYellow.Width = 185;
                     panelYellow.Height = 55;
+                    gBox.Location = new Point(15, 50);
 
                     bttnReload_Click(sender, e);
-                }                
+                }
             }
-            else if(labelAdd.Text == "Изменить") {
+            else if (labelAdd.Text == "Изменить") {
                 if (dataTableIncome.SelectedRows.Count == 1) {
                     Income.IDIncome = dataTableIncome.SelectedRows[0].Cells[0].Value.ToString();
                     Income.NameIncome = tbName.Text;
