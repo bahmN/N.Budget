@@ -1,6 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -45,9 +44,6 @@ namespace Tinkoff_Бюджет
 
             panelYellow.Width = 185;
             panelYellow.Height = 55;
-
-            dateTimeP.Value = DateTime.Now;
-            dateTimeP.MaxDate = DateTime.Now;
         }
 
         /*
@@ -74,11 +70,9 @@ namespace Tinkoff_Бюджет
             dataTableOExpenses.Columns[3].Visible = false;
             dataTableOExpenses.Columns[4].Visible = false;
 
-           
-
-            MySqlDataAdapter daIExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Необязательные'", connection);
+            MySqlDataAdapter daExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Необязательные'", connection);
             DataTable dtExpenses = new DataTable();
-            daIExpenses.Fill(dtExpenses);
+            daExpenses.Fill(dtExpenses);
             dataTableExpenses.DataSource = dtExpenses;
             dataTableExpenses.RowHeadersVisible = false; // Hide the display of the left column
             dataTableExpenses.AllowUserToAddRows = false; // Hide the display of the bottom column
@@ -95,22 +89,31 @@ namespace Tinkoff_Бюджет
             MySqlCommand cSumOE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE `Вид трат`= 'Обязательные'", connection);
             object sumOEObj = cSumOE.ExecuteScalar();
             string sumOE = sumOEObj.ToString(); //Переменная, хранящая сумму обязательных трат
-            labelTotalOENumber.Text = sumOE;            
+            labelTotalOENumber.Text = sumOE;
 
             //Вывод суммы свободных денег в label
             float sumFreeMoney = float.Parse(sumI) - float.Parse(sumOE);
             labelOEDNumber.Text = sumFreeMoney.ToString();
 
-            //Вывод суммы остатка в label
+            //Вывод суммы остатка в label до конца месяца
             MySqlCommand cSumE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE `Вид трат`= 'Необязательные'", connection);
             object sumEObj = cSumE.ExecuteScalar();
             string sumE = sumEObj.ToString(); //Переменная, хранящая сумму обязательных трат
-            float sumRem = sumFreeMoney - float.Parse(sumE);
+            float sumRem; //Переменная суммы остатка до конца месяца
+            if (sumE == "") {
+                sumRem = sumFreeMoney - 0;
+            }
+            else {
+                sumRem = sumFreeMoney - float.Parse(sumE);
+            }
             labelRemainderNumber.Text = sumRem.ToString();
 
-            //Сортировка повседневных трат по дате
-            dataTableExpenses.Sort(dataTableExpenses.Columns[3], ListSortDirection.Ascending);
+            //Вывод суммы денег на день в label
+            float sumInD = sumRem / 31;
+            labelInDNumber.Text = sumInD.ToString();
 
+            //Сортировка повседневных трат по дате
+            //dataTableExpenses.Sort(dataTableExpenses.Columns[3], ListSortDirection.Ascending);
         }
 
         /*
@@ -119,17 +122,16 @@ namespace Tinkoff_Бюджет
         //Добавить
         private void bttnAdd_Click(object sender, EventArgs e)
         {
-            gBox.Visible = true;
-            panelYellow.Width = 225;
-            panelYellow.Height = 180;
-            labelChoose.Text = "Что требуется добавить?";
+            dateTimeP.Value = DateTime.Now;
+            dateTimeP.MaxDate = DateTime.Now;
 
             tbName.Text = default;
             tbSum.Text = default;
 
-            radioBttnIncome.Checked = default;
-            radioBttnOExpenses.Checked = default;
-            radioBttnExpenses.Checked = default;
+            gBox.Visible = true;
+            panelYellow.Width = 225;
+            panelYellow.Height = 180;
+            labelChoose.Text = "Что требуется добавить?";
         }
 
         //Изменить
@@ -182,10 +184,10 @@ namespace Tinkoff_Бюджет
                 bttnReload_Click(sender, e);
             }
         }
-        //Обработчик нажатия кнопок на клавиатуре
+        //Обработчик нажатия кнопок на клавиатуре (Delete)
         private void dataTableIncome_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Delete) {
+            if (e.KeyCode == Keys.Delete) {
                 bttnDelete_Click(sender, e);
             }
         }
@@ -222,7 +224,6 @@ namespace Tinkoff_Бюджет
 
             bttnRollUp.Visible = false;
         }
-
         private void bttnOExpenses_CheckedChanged(object sender, EventArgs e)
         {
             gBox.Width = 200;
@@ -240,7 +241,6 @@ namespace Tinkoff_Бюджет
 
             bttnRollUp.Visible = false;
         }
-
         private void bttnExpenses_CheckedChanged(object sender, EventArgs e)
         {
             gBox.Width = 200;
@@ -280,7 +280,7 @@ namespace Tinkoff_Бюджет
             if (labelAdd.Text == "Изменить") {
                 panelYellow.Width = 185;
                 panelYellow.Height = 55;
-            }            
+            }
         }
 
         /*
@@ -326,7 +326,7 @@ namespace Tinkoff_Бюджет
                     Expenses.ConditionExpenses = "Добавить";
                     Expenses.NameExpenses = tbName.Text;
                     Expenses.SumExpenses = tbSum.Text;
-                    Expenses.DateExpenses = dateTimeP.Text;
+                    Expenses.DateExpenses = dateTimeP.Value.ToString("yyyy-MM-dd");
                     Expenses.SQLRequestExpenses();
 
                     panelYellow.Width = 185;
@@ -380,36 +380,31 @@ namespace Tinkoff_Бюджет
         /*
          * Выделение строк в таблице
          */
+        #region Переменные для определения индекса выделенной строки
+            static private int indexI;
+            static private int indexOE;
+            static private int indexE;
+        #endregion
         private void dataTableIncome_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try {
-                dataTableIncome.Rows[e.RowIndex].Selected = true;
-                dataTableOExpenses.Rows[e.RowIndex].Selected = false;
-                dataTableExpenses.Rows[e.RowIndex].Selected = false;
-            }
-            catch { }
+            dataTableIncome.Rows[e.RowIndex].Selected = true;
+            dataTableOExpenses.Rows[indexOE].Selected = false;
+            dataTableExpenses.Rows[indexE].Selected = false;
+            indexI = e.RowIndex;
         }
-
         private void dataTableOExpenses_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try {
-                dataTableIncome.Rows[e.RowIndex].Selected = false;
-                dataTableOExpenses.Rows[e.RowIndex].Selected = true;
-                dataTableExpenses.Rows[e.RowIndex].Selected = false;
-            }
-            catch { }
+            dataTableOExpenses.Rows[e.RowIndex].Selected = true;
+            dataTableIncome.Rows[indexI].Selected = false;
+            dataTableExpenses.Rows[indexE].Selected = false;
+            indexOE = e.RowIndex;
         }
-
         private void dataTableExpenses_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try {
-                dataTableIncome.Rows[e.RowIndex].Selected = false;
-                dataTableOExpenses.Rows[e.RowIndex].Selected = false;
-                dataTableExpenses.Rows[e.RowIndex].Selected = true;
-            }
-            catch { }
+            dataTableExpenses.Rows[e.RowIndex].Selected = true;
+            dataTableIncome.Rows[indexI].Selected = false;
+            dataTableOExpenses.Rows[indexOE].Selected = false;
+            indexE = e.RowIndex;
         }
-
-        
     }
 }
