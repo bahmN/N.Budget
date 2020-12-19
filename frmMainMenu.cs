@@ -38,7 +38,7 @@ namespace Tinkoff_Бюджет
 
         private void formMainMenu_Load(object sender, EventArgs e)
         {
-            connection = new MySqlConnection("server = 127.0.0.1; port = 3306; user = root; password = Vfhnvfhn23@; database = tinkoffbudget; sslmode = none;");
+            connection = new MySqlConnection("server = b9i0ofezzxk3my0z36nr-mysql.services.clever-cloud.com; port = 3306; user = u24mpzyvihsz04z3; password = QLAXKWFO8TDSYzdY0C1Q; database = b9i0ofezzxk3my0z36nr; sslmode = none;");
             connection.Open();
             bttnReload_Click(sender, e);
 
@@ -70,7 +70,7 @@ namespace Tinkoff_Бюджет
             dataTableOExpenses.Columns[3].Visible = false;
             dataTableOExpenses.Columns[4].Visible = false;
 
-            MySqlDataAdapter daExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Необязательные'", connection);
+            MySqlDataAdapter daExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Необязательные' ORDER BY дата ASC", connection);
             DataTable dtExpenses = new DataTable();
             daExpenses.Fill(dtExpenses);
             dataTableExpenses.DataSource = dtExpenses;
@@ -109,11 +109,8 @@ namespace Tinkoff_Бюджет
             labelRemainderNumber.Text = sumRem.ToString();
 
             //Вывод суммы денег на день в label
-            float sumInD = sumRem / 31;
+            double sumInD = Math.Round(sumRem / 31, 2);
             labelInDNumber.Text = sumInD.ToString();
-
-            //Сортировка повседневных трат по дате
-            //dataTableExpenses.Sort(dataTableExpenses.Columns[3], ListSortDirection.Ascending);
         }
 
         /*
@@ -132,6 +129,13 @@ namespace Tinkoff_Бюджет
             panelYellow.Width = 225;
             panelYellow.Height = 180;
             labelChoose.Text = "Что требуется добавить?";
+        }
+        //Обработчик нажатия кнопок на клавиатуре (Enter)
+        private void bttnConfirm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                bttnAdd_Click(sender, e);
+            }
         }
 
         //Изменить
@@ -381,30 +385,39 @@ namespace Tinkoff_Бюджет
          * Выделение строк в таблице
          */
         #region Переменные для определения индекса выделенной строки
-            static private int indexI;
-            static private int indexOE;
-            static private int indexE;
+        static private int indexI;
+        static private int indexOE;
+        static private int indexE;
         #endregion
         private void dataTableIncome_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataTableIncome.Rows[e.RowIndex].Selected = true;
-            dataTableOExpenses.Rows[indexOE].Selected = false;
-            dataTableExpenses.Rows[indexE].Selected = false;
-            indexI = e.RowIndex;
+            try {
+                dataTableIncome.Rows[e.RowIndex].Selected = true;
+                dataTableOExpenses.Rows[indexOE].Selected = false;
+                dataTableExpenses.Rows[indexE].Selected = false;
+                indexI = e.RowIndex;
+            }
+            catch { }
         }
         private void dataTableOExpenses_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataTableOExpenses.Rows[e.RowIndex].Selected = true;
-            dataTableIncome.Rows[indexI].Selected = false;
-            dataTableExpenses.Rows[indexE].Selected = false;
-            indexOE = e.RowIndex;
+            try {
+                dataTableOExpenses.Rows[e.RowIndex].Selected = true;
+                dataTableIncome.Rows[indexI].Selected = false;
+                dataTableExpenses.Rows[indexE].Selected = false;
+                indexOE = e.RowIndex;
+            }
+            catch { }
         }
         private void dataTableExpenses_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataTableExpenses.Rows[e.RowIndex].Selected = true;
-            dataTableIncome.Rows[indexI].Selected = false;
-            dataTableOExpenses.Rows[indexOE].Selected = false;
-            indexE = e.RowIndex;
+            try {
+                dataTableExpenses.Rows[e.RowIndex].Selected = true;
+                dataTableIncome.Rows[indexI].Selected = false;
+                dataTableOExpenses.Rows[indexOE].Selected = false;
+                indexE = e.RowIndex;
+            }
+            catch { }
         }
     }
 }
