@@ -16,7 +16,7 @@ namespace Tinkoff_Бюджет
         public static void SQLRequestOExpenses()
         {
             if (ConditionOExpenses == "Добавить") {
-                MySqlCommand cAdd = new MySqlCommand("INSERT INTO траты(Наименование, Сумма, `Вид трат`) VALUES ('" + NameOExpenses + "', '" + SumOExpenses + "', " +
+                MySqlCommand cAdd = new MySqlCommand("INSERT INTO траты(Наименование, Сумма, `Вид трат`, `ID пользователя`) VALUES ('" + NameOExpenses + "', '" + SumOExpenses + "', " +
                     "'Обязательные', '" + UserID + "')", frmStart.connection);
                 cAdd.ExecuteNonQuery();
             }
