@@ -12,16 +12,17 @@ namespace Tinkoff_Бюджет
         static public string NameExpenses { get; set; }
         static public string SumExpenses { get; set; }
         static public string DateExpenses { get; set; }
+        static public string UserID { get; set; }
         public static void SQLRequestExpenses()
         {
             if (ConditionExpenses == "Добавить") {
-                MySqlCommand cAdd = new MySqlCommand("INSERT INTO траты(Наименование, Сумма, `Вид трат`, Дата) VALUES " +
-                    "('" + NameExpenses + "', '" + SumExpenses + "', 'Необязательные', '" + DateExpenses + "')", frmMainMenu.connection);
+                MySqlCommand cAdd = new MySqlCommand("INSERT INTO траты(Наименование, Сумма, `Вид трат`, Дата, `ID Пользователя`) VALUES " +
+                    "('" + NameExpenses + "', '" + SumExpenses + "', 'Повседневные', '" + DateExpenses + "', '" + UserID + "')", frmStart.connection);
                 cAdd.ExecuteNonQuery();
             }
             else {
                 MySqlCommand cEdit = new MySqlCommand("UPDATE траты SET Наименование= '" + NameExpenses + "', Сумма= '" + SumExpenses + "', " +
-                    "Дата= '"+DateExpenses+ "' WHERE `ID трат`= '" + IDExpenses + "'", frmMainMenu.connection);
+                    "Дата= '" + DateExpenses + "' WHERE `ID трат`= '" + IDExpenses + "'", frmStart.connection);
                 cEdit.ExecuteNonQuery();
             }
         }
