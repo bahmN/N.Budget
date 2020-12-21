@@ -33,7 +33,7 @@ namespace Tinkoff_Бюджет
             this.bttnCancel = new System.Windows.Forms.Button();
             this.bttnConfirm = new System.Windows.Forms.Button();
             this.tbPassword = new System.Windows.Forms.TextBox();
-            this.tbName = new System.Windows.Forms.TextBox();
+            this.tbLogin = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.panelUp = new System.Windows.Forms.Panel();
             this.bttnClose = new System.Windows.Forms.PictureBox();
@@ -94,16 +94,17 @@ namespace Tinkoff_Бюджет
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(171, 23);
             this.tbPassword.TabIndex = 29;
+            this.tbPassword.UseSystemPasswordChar = true;
             // 
-            // tbName
+            // tbLogin
             // 
-            this.tbName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(246)))));
-            this.tbName.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
-            this.tbName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.tbName.Location = new System.Drawing.Point(91, 66);
-            this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(171, 23);
-            this.tbName.TabIndex = 28;
+            this.tbLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(246)))));
+            this.tbLogin.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
+            this.tbLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.tbLogin.Location = new System.Drawing.Point(91, 66);
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.Size = new System.Drawing.Size(171, 23);
+            this.tbLogin.TabIndex = 28;
             // 
             // labelPassword
             // 
@@ -160,7 +161,7 @@ namespace Tinkoff_Бюджет
             this.Controls.Add(this.bttnCancel);
             this.Controls.Add(this.bttnConfirm);
             this.Controls.Add(this.tbPassword);
-            this.Controls.Add(this.tbName);
+            this.Controls.Add(this.tbLogin);
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.panelUp);
             this.Controls.Add(this.labelLogin);
@@ -183,7 +184,7 @@ namespace Tinkoff_Бюджет
         private System.Windows.Forms.Button bttnCancel;
         private System.Windows.Forms.Button bttnConfirm;
         private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.TextBox tbLogin;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.Panel panelUp;
         private System.Windows.Forms.PictureBox bttnClose;
