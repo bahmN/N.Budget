@@ -29,12 +29,12 @@ namespace Tinkoff_Бюджет
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainMenu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelUp = new System.Windows.Forms.Panel();
             this.bttnClose = new System.Windows.Forms.PictureBox();
             this.labelHeader = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@ namespace Tinkoff_Бюджет
             this.bttnDelete = new System.Windows.Forms.PictureBox();
             this.bttnReload = new System.Windows.Forms.PictureBox();
             this.panelYellow = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.bttnCancel = new System.Windows.Forms.Button();
             this.bttnConfirm = new System.Windows.Forms.Button();
             this.gBoxAdd = new System.Windows.Forms.Panel();
@@ -70,6 +70,12 @@ namespace Tinkoff_Бюджет
             this.radioBttnExpenses = new System.Windows.Forms.RadioButton();
             this.radioBttnIncome = new System.Windows.Forms.RadioButton();
             this.radioBttnOExpenses = new System.Windows.Forms.RadioButton();
+            this.labelOEDNumber = new System.Windows.Forms.Label();
+            this.labelOED = new System.Windows.Forms.Label();
+            this.labelRemainderNumber = new System.Windows.Forms.Label();
+            this.labelRemainder = new System.Windows.Forms.Label();
+            this.labelInDNumber = new System.Windows.Forms.Label();
+            this.labelInD = new System.Windows.Forms.Label();
             this.panelUp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bttnClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableIncome)).BeginInit();
@@ -80,7 +86,7 @@ namespace Tinkoff_Бюджет
             ((System.ComponentModel.ISupportInitialize)(this.bttnDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bttnReload)).BeginInit();
             this.panelYellow.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.gBoxAdd.SuspendLayout();
             this.gBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bttnRollUp)).BeginInit();
@@ -92,6 +98,7 @@ namespace Tinkoff_Бюджет
             this.panelUp.Controls.Add(this.bttnClose);
             this.panelUp.Controls.Add(this.labelHeader);
             this.panelUp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelUp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.panelUp.Location = new System.Drawing.Point(0, 0);
             this.panelUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelUp.Name = "panelUp";
@@ -133,29 +140,30 @@ namespace Tinkoff_Бюджет
             this.dataTableIncome.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(246)))));
             this.dataTableIncome.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dataTableIncome.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataTableIncome.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataTableIncome.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataTableIncome.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataTableIncome.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataTableIncome.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataTableIncome.Location = new System.Drawing.Point(12, 65);
             this.dataTableIncome.Name = "dataTableIncome";
             this.dataTableIncome.ReadOnly = true;
             this.dataTableIncome.Size = new System.Drawing.Size(330, 398);
             this.dataTableIncome.TabIndex = 1;
             this.dataTableIncome.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTableIncome_CellClick);
+            this.dataTableIncome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataTableIncome_KeyDown);
             // 
             // dataTableOExpenses
             // 
@@ -167,29 +175,30 @@ namespace Tinkoff_Бюджет
             this.dataTableOExpenses.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(246)))));
             this.dataTableOExpenses.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dataTableOExpenses.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataTableOExpenses.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataTableOExpenses.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataTableOExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataTableOExpenses.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataTableOExpenses.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataTableOExpenses.Location = new System.Drawing.Point(348, 65);
             this.dataTableOExpenses.Name = "dataTableOExpenses";
             this.dataTableOExpenses.ReadOnly = true;
             this.dataTableOExpenses.Size = new System.Drawing.Size(330, 398);
             this.dataTableOExpenses.TabIndex = 2;
             this.dataTableOExpenses.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTableOExpenses_CellClick);
+            this.dataTableOExpenses.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataTableOExpenses_KeyDown);
             // 
             // dataTableExpenses
             // 
@@ -201,29 +210,30 @@ namespace Tinkoff_Бюджет
             this.dataTableExpenses.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(246)))));
             this.dataTableExpenses.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dataTableExpenses.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataTableExpenses.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataTableExpenses.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataTableExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataTableExpenses.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataTableExpenses.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataTableExpenses.Location = new System.Drawing.Point(684, 65);
             this.dataTableExpenses.Name = "dataTableExpenses";
             this.dataTableExpenses.ReadOnly = true;
             this.dataTableExpenses.Size = new System.Drawing.Size(804, 697);
             this.dataTableExpenses.TabIndex = 3;
             this.dataTableExpenses.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTableExpenses_CellClick);
+            this.dataTableExpenses.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataTableExpenses_KeyDown);
             // 
             // labelIncome
             // 
@@ -252,11 +262,11 @@ namespace Tinkoff_Бюджет
             this.labelExpenses.AutoSize = true;
             this.labelExpenses.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelExpenses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.labelExpenses.Location = new System.Drawing.Point(1044, 41);
+            this.labelExpenses.Location = new System.Drawing.Point(987, 41);
             this.labelExpenses.Name = "labelExpenses";
-            this.labelExpenses.Size = new System.Drawing.Size(85, 21);
+            this.labelExpenses.Size = new System.Drawing.Size(199, 21);
             this.labelExpenses.TabIndex = 5;
-            this.labelExpenses.Text = "Рассходы";
+            this.labelExpenses.Text = "Повседневные расходы";
             // 
             // labelTotalIn
             // 
@@ -265,31 +275,33 @@ namespace Tinkoff_Бюджет
             this.labelTotalIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.labelTotalIn.Location = new System.Drawing.Point(12, 478);
             this.labelTotalIn.Name = "labelTotalIn";
-            this.labelTotalIn.Size = new System.Drawing.Size(58, 21);
+            this.labelTotalIn.Size = new System.Drawing.Size(128, 21);
             this.labelTotalIn.TabIndex = 7;
-            this.labelTotalIn.Text = "Всего:";
+            this.labelTotalIn.Text = "Сумма дохода:";
             // 
             // labelTotalInNumb
             // 
             this.labelTotalInNumb.AutoSize = true;
+            this.labelTotalInNumb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
             this.labelTotalInNumb.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelTotalInNumb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.labelTotalInNumb.Location = new System.Drawing.Point(76, 478);
+            this.labelTotalInNumb.Location = new System.Drawing.Point(146, 478);
             this.labelTotalInNumb.Name = "labelTotalInNumb";
-            this.labelTotalInNumb.Size = new System.Drawing.Size(67, 21);
+            this.labelTotalInNumb.Size = new System.Drawing.Size(19, 21);
             this.labelTotalInNumb.TabIndex = 8;
-            this.labelTotalInNumb.Text = "number";
+            this.labelTotalInNumb.Text = "0";
             // 
             // labelTotalOENumber
             // 
             this.labelTotalOENumber.AutoSize = true;
+            this.labelTotalOENumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
             this.labelTotalOENumber.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelTotalOENumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.labelTotalOENumber.Location = new System.Drawing.Point(412, 478);
+            this.labelTotalOENumber.Location = new System.Drawing.Point(614, 478);
             this.labelTotalOENumber.Name = "labelTotalOENumber";
-            this.labelTotalOENumber.Size = new System.Drawing.Size(67, 21);
+            this.labelTotalOENumber.Size = new System.Drawing.Size(19, 21);
             this.labelTotalOENumber.TabIndex = 10;
-            this.labelTotalOENumber.Text = "number";
+            this.labelTotalOENumber.Text = "0";
             // 
             // labelTotalOE
             // 
@@ -298,15 +310,15 @@ namespace Tinkoff_Бюджет
             this.labelTotalOE.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.labelTotalOE.Location = new System.Drawing.Point(348, 478);
             this.labelTotalOE.Name = "labelTotalOE";
-            this.labelTotalOE.Size = new System.Drawing.Size(58, 21);
+            this.labelTotalOE.Size = new System.Drawing.Size(260, 21);
             this.labelTotalOE.TabIndex = 9;
-            this.labelTotalOE.Text = "Всего:";
+            this.labelTotalOE.Text = "Сумма обязательных расходов:";
             // 
             // bttnEdit
             // 
             this.bttnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bttnEdit.Image = ((System.Drawing.Image)(resources.GetObject("bttnEdit.Image")));
-            this.bttnEdit.Location = new System.Drawing.Point(64, 9);
+            this.bttnEdit.Location = new System.Drawing.Point(57, 9);
             this.bttnEdit.Name = "bttnEdit";
             this.bttnEdit.Size = new System.Drawing.Size(35, 35);
             this.bttnEdit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -318,7 +330,7 @@ namespace Tinkoff_Бюджет
             // 
             this.bttnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bttnAdd.Image = ((System.Drawing.Image)(resources.GetObject("bttnAdd.Image")));
-            this.bttnAdd.Location = new System.Drawing.Point(23, 9);
+            this.bttnAdd.Location = new System.Drawing.Point(16, 9);
             this.bttnAdd.Name = "bttnAdd";
             this.bttnAdd.Size = new System.Drawing.Size(35, 35);
             this.bttnAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -330,7 +342,7 @@ namespace Tinkoff_Бюджет
             // 
             this.bttnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bttnDelete.Image = ((System.Drawing.Image)(resources.GetObject("bttnDelete.Image")));
-            this.bttnDelete.Location = new System.Drawing.Point(105, 9);
+            this.bttnDelete.Location = new System.Drawing.Point(98, 9);
             this.bttnDelete.Name = "bttnDelete";
             this.bttnDelete.Size = new System.Drawing.Size(35, 35);
             this.bttnDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -342,7 +354,7 @@ namespace Tinkoff_Бюджет
             // 
             this.bttnReload.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bttnReload.Image = ((System.Drawing.Image)(resources.GetObject("bttnReload.Image")));
-            this.bttnReload.Location = new System.Drawing.Point(146, 9);
+            this.bttnReload.Location = new System.Drawing.Point(139, 9);
             this.bttnReload.Name = "bttnReload";
             this.bttnReload.Size = new System.Drawing.Size(35, 35);
             this.bttnReload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -353,7 +365,7 @@ namespace Tinkoff_Бюджет
             // panelYellow
             // 
             this.panelYellow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
-            this.panelYellow.Controls.Add(this.pictureBox1);
+            this.panelYellow.Controls.Add(this.pictureBox);
             this.panelYellow.Controls.Add(this.bttnCancel);
             this.panelYellow.Controls.Add(this.bttnConfirm);
             this.panelYellow.Controls.Add(this.gBoxAdd);
@@ -367,15 +379,15 @@ namespace Tinkoff_Бюджет
             this.panelYellow.Size = new System.Drawing.Size(580, 180);
             this.panelYellow.TabIndex = 14;
             // 
-            // pictureBox1
+            // pictureBox
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(217, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(5, 175);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 24;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
+            this.pictureBox.Location = new System.Drawing.Point(217, 3);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(5, 175);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 24;
+            this.pictureBox.TabStop = false;
             // 
             // bttnCancel
             // 
@@ -408,6 +420,7 @@ namespace Tinkoff_Бюджет
             this.bttnConfirm.Text = "Подтвердить";
             this.bttnConfirm.UseVisualStyleBackColor = true;
             this.bttnConfirm.Click += new System.EventHandler(this.bttnConfirm_Click);
+            this.bttnConfirm.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bttnConfirm_KeyDown);
             // 
             // gBoxAdd
             // 
@@ -432,10 +445,12 @@ namespace Tinkoff_Бюджет
             this.dateTimeP.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
             this.dateTimeP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimeP.Location = new System.Drawing.Point(149, 85);
+            this.dateTimeP.MaxDate = new System.DateTime(2020, 12, 21, 0, 0, 0, 0);
             this.dateTimeP.MinDate = new System.DateTime(1940, 1, 1, 0, 0, 0, 0);
             this.dateTimeP.Name = "dateTimeP";
             this.dateTimeP.Size = new System.Drawing.Size(189, 23);
             this.dateTimeP.TabIndex = 19;
+            this.dateTimeP.Value = new System.DateTime(2020, 12, 20, 0, 0, 0, 0);
             // 
             // labelDate
             // 
@@ -508,7 +523,7 @@ namespace Tinkoff_Бюджет
             this.gBox.Controls.Add(this.radioBttnExpenses);
             this.gBox.Controls.Add(this.radioBttnIncome);
             this.gBox.Controls.Add(this.radioBttnOExpenses);
-            this.gBox.Location = new System.Drawing.Point(15, 50);
+            this.gBox.Location = new System.Drawing.Point(8, 50);
             this.gBox.Name = "gBox";
             this.gBox.Size = new System.Drawing.Size(205, 126);
             this.gBox.TabIndex = 20;
@@ -559,7 +574,6 @@ namespace Tinkoff_Бюджет
             this.radioBttnIncome.Name = "radioBttnIncome";
             this.radioBttnIncome.Size = new System.Drawing.Size(64, 21);
             this.radioBttnIncome.TabIndex = 0;
-            this.radioBttnIncome.TabStop = true;
             this.radioBttnIncome.Text = "Доход";
             this.radioBttnIncome.UseVisualStyleBackColor = true;
             this.radioBttnIncome.CheckedChanged += new System.EventHandler(this.radioBttnIncome_CheckedChanged);
@@ -578,12 +592,87 @@ namespace Tinkoff_Бюджет
             this.radioBttnOExpenses.UseVisualStyleBackColor = true;
             this.radioBttnOExpenses.CheckedChanged += new System.EventHandler(this.bttnOExpenses_CheckedChanged);
             // 
+            // labelOEDNumber
+            // 
+            this.labelOEDNumber.AutoSize = true;
+            this.labelOEDNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
+            this.labelOEDNumber.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelOEDNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.labelOEDNumber.Location = new System.Drawing.Point(218, 512);
+            this.labelOEDNumber.Name = "labelOEDNumber";
+            this.labelOEDNumber.Size = new System.Drawing.Size(19, 21);
+            this.labelOEDNumber.TabIndex = 16;
+            this.labelOEDNumber.Text = "0";
+            // 
+            // labelOED
+            // 
+            this.labelOED.AutoSize = true;
+            this.labelOED.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelOED.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.labelOED.Location = new System.Drawing.Point(12, 512);
+            this.labelOED.Name = "labelOED";
+            this.labelOED.Size = new System.Drawing.Size(200, 21);
+            this.labelOED.TabIndex = 15;
+            this.labelOED.Text = "Всего свободных денег:";
+            // 
+            // labelRemainderNumber
+            // 
+            this.labelRemainderNumber.AutoSize = true;
+            this.labelRemainderNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
+            this.labelRemainderNumber.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelRemainderNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.labelRemainderNumber.Location = new System.Drawing.Point(235, 546);
+            this.labelRemainderNumber.Name = "labelRemainderNumber";
+            this.labelRemainderNumber.Size = new System.Drawing.Size(19, 21);
+            this.labelRemainderNumber.TabIndex = 18;
+            this.labelRemainderNumber.Text = "0";
+            // 
+            // labelRemainder
+            // 
+            this.labelRemainder.AutoSize = true;
+            this.labelRemainder.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelRemainder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.labelRemainder.Location = new System.Drawing.Point(12, 546);
+            this.labelRemainder.Name = "labelRemainder";
+            this.labelRemainder.Size = new System.Drawing.Size(217, 21);
+            this.labelRemainder.TabIndex = 17;
+            this.labelRemainder.Text = "Остаток до конца месяца:";
+            // 
+            // labelInDNumber
+            // 
+            this.labelInDNumber.AutoSize = true;
+            this.labelInDNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(13)))));
+            this.labelInDNumber.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelInDNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.labelInDNumber.Location = new System.Drawing.Point(498, 512);
+            this.labelInDNumber.Name = "labelInDNumber";
+            this.labelInDNumber.Size = new System.Drawing.Size(19, 21);
+            this.labelInDNumber.TabIndex = 20;
+            this.labelInDNumber.Text = "0";
+            // 
+            // labelInD
+            // 
+            this.labelInD.AutoSize = true;
+            this.labelInD.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelInD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.labelInD.Location = new System.Drawing.Point(348, 512);
+            this.labelInD.Name = "labelInD";
+            this.labelInD.Size = new System.Drawing.Size(144, 21);
+            this.labelInD.TabIndex = 19;
+            this.labelInD.Text = "Бюджет на день:";
+            // 
             // frmMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(246)))));
             this.ClientSize = new System.Drawing.Size(1500, 777);
+            this.Controls.Add(this.labelInDNumber);
+            this.Controls.Add(this.labelInD);
+            this.Controls.Add(this.labelRemainderNumber);
+            this.Controls.Add(this.labelRemainder);
+            this.Controls.Add(this.labelOEDNumber);
+            this.Controls.Add(this.labelOED);
             this.Controls.Add(this.panelYellow);
             this.Controls.Add(this.labelTotalOENumber);
             this.Controls.Add(this.labelTotalOE);
@@ -597,6 +686,7 @@ namespace Tinkoff_Бюджет
             this.Controls.Add(this.dataTableIncome);
             this.Controls.Add(this.panelUp);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMainMenu";
@@ -613,7 +703,7 @@ namespace Tinkoff_Бюджет
             ((System.ComponentModel.ISupportInitialize)(this.bttnDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bttnReload)).EndInit();
             this.panelYellow.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.gBoxAdd.ResumeLayout(false);
             this.gBoxAdd.PerformLayout();
             this.gBox.ResumeLayout(false);
@@ -659,8 +749,14 @@ namespace Tinkoff_Бюджет
         private System.Windows.Forms.Button bttnCancel;
         private System.Windows.Forms.DateTimePicker dateTimeP;
         private System.Windows.Forms.Label labelDate;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.PictureBox bttnRollUp;
+        private System.Windows.Forms.Label labelOEDNumber;
+        private System.Windows.Forms.Label labelOED;
+        private System.Windows.Forms.Label labelRemainderNumber;
+        private System.Windows.Forms.Label labelRemainder;
+        private System.Windows.Forms.Label labelInDNumber;
+        private System.Windows.Forms.Label labelInD;
     }
 }
 

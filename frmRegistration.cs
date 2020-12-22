@@ -25,8 +25,11 @@ namespace Tinkoff_Бюджет
 
                 string password = HashingPsw.HashPassword(tbPassword.Text);
                 MySqlCommand cAdd = new MySqlCommand("INSERT INTO пользователи(Логин, Пароль) VALUES ('" + tbLogin.Text + "', '" + password + "')", connection);
-                cAdd.ExecuteNonQuery();
-                connection.Close();
+                if(cAdd.ExecuteNonQuery() == 1) {
+                    connection.Close();
+                    Close();
+                }
+                
             }
         }
 

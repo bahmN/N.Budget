@@ -9,11 +9,12 @@ namespace Tinkoff_Бюджет
 {
     public partial class frmMainMenu : Form
     {
-        public frmMainMenu()
+        public frmMainMenu(string userId)
         {
             InitializeComponent();
+            userID = userId;
         }
-        static public MySqlConnection connection;
+        static private string userID;
         /*
          * Параметры перемещения
          */
@@ -38,8 +39,7 @@ namespace Tinkoff_Бюджет
 
         private void formMainMenu_Load(object sender, EventArgs e)
         {
-            connection = new MySqlConnection("server = b9i0ofezzxk3my0z36nr-mysql.services.clever-cloud.com; port = 3306; user = u24mpzyvihsz04z3; password = QLAXKWFO8TDSYzdY0C1Q; database = b9i0ofezzxk3my0z36nr; sslmode = none;");
-            connection.Open();
+
             bttnReload_Click(sender, e);
 
             panelYellow.Width = 185;
@@ -51,16 +51,21 @@ namespace Tinkoff_Бюджет
          */
         private void bttnReload_Click(object sender, EventArgs e)
         {
-            MySqlDataAdapter daIncome = new MySqlDataAdapter("SELECT * FROM доход", connection);
+            //Строка sql-запроса по выбору диапазона даты
+            SqlStringDate sqlS = new SqlStringDate();
+            string sqlString = sqlS.GetDate();
+
+            #region Отобразить БД
+            MySqlDataAdapter daIncome = new MySqlDataAdapter("SELECT * FROM доход WHERE `ID пользователя`= '" + userID + "'", frmStart.connection);
             DataTable dtIncome = new DataTable();
             daIncome.Fill(dtIncome);
             dataTableIncome.DataSource = dtIncome;
             dataTableIncome.RowHeadersVisible = false; // Hide the display of the left column
             dataTableIncome.AllowUserToAddRows = false; // Hide the display of the bottom column
             dataTableIncome.Columns[0].Visible = false;
+            dataTableIncome.Columns[3].Visible = false;
 
-
-            MySqlDataAdapter daOExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Обязательные'", connection);
+            MySqlDataAdapter daOExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Обязательные' AND `ID пользователя`= '" + userID + "'", frmStart.connection);
             DataTable dtOExpenses = new DataTable();
             daOExpenses.Fill(dtOExpenses);
             dataTableOExpenses.DataSource = dtOExpenses;
@@ -69,8 +74,9 @@ namespace Tinkoff_Бюджет
             dataTableOExpenses.Columns[0].Visible = false;
             dataTableOExpenses.Columns[3].Visible = false;
             dataTableOExpenses.Columns[4].Visible = false;
+            dataTableOExpenses.Columns[5].Visible = false;
 
-            MySqlDataAdapter daExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE `Вид трат`= 'Необязательные' ORDER BY дата ASC", connection);
+            MySqlDataAdapter daExpenses = new MySqlDataAdapter("SELECT * FROM траты WHERE " + sqlString + " AND (`Вид трат`= 'Повседневные') AND (`ID пользователя`= '" + userID + "') ORDER BY Дата", frmStart.connection);
             DataTable dtExpenses = new DataTable();
             daExpenses.Fill(dtExpenses);
             dataTableExpenses.DataSource = dtExpenses;
@@ -78,25 +84,40 @@ namespace Tinkoff_Бюджет
             dataTableExpenses.AllowUserToAddRows = false; // Hide the display of the bottom column
             dataTableExpenses.Columns[0].Visible = false;
             dataTableExpenses.Columns[3].Visible = false;
+            dataTableExpenses.Columns[5].Visible = false;
+            #endregion
 
+            #region Отобразить суммы в label
             //Вывод суммы дохода в label 
-            MySqlCommand cSumI = new MySqlCommand("SELECT SUM(Сумма) FROM доход", connection);
+            MySqlCommand cSumI = new MySqlCommand("SELECT SUM(Сумма) FROM доход WHERE `ID Пользователя`= '" + userID + "'", frmStart.connection);
             object sumIObj = cSumI.ExecuteScalar();
             string sumI = sumIObj.ToString(); //Перменная, хранящая сумму дохода
-            labelTotalInNumb.Text = sumI;
+            if(sumI == "") {
+                sumI = "0";
+                labelTotalInNumb.Text = sumI;
+            }
+            else {
+                labelTotalInNumb.Text = sumI;
+            }            
 
             //Вывод суммы обязательных трат в label
-            MySqlCommand cSumOE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE `Вид трат`= 'Обязательные'", connection);
+            MySqlCommand cSumOE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE `Вид трат`= 'Обязательные' AND `ID Пользователя`= '" + userID + "'", frmStart.connection);
             object sumOEObj = cSumOE.ExecuteScalar();
-            string sumOE = sumOEObj.ToString(); //Переменная, хранящая сумму обязательных трат
-            labelTotalOENumber.Text = sumOE;
+            string sumOE = sumOEObj.ToString(); //Переменная, хранящая сумму обязательных трат            
+            if (sumOE == "") {
+                sumOE = "0";
+                labelTotalOENumber.Text = sumOE;
+            }
+            else {
+                labelTotalOENumber.Text = sumOE;
+            }
 
             //Вывод суммы свободных денег в label
             float sumFreeMoney = float.Parse(sumI) - float.Parse(sumOE);
             labelOEDNumber.Text = sumFreeMoney.ToString();
 
             //Вывод суммы остатка в label до конца месяца
-            MySqlCommand cSumE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE `Вид трат`= 'Необязательные'", connection);
+            MySqlCommand cSumE = new MySqlCommand("SELECT SUM(Сумма) FROM траты WHERE " + sqlString + " AND `Вид трат`= 'Повседневные' AND `ID Пользователя`= '" + userID + "'", frmStart.connection);
             object sumEObj = cSumE.ExecuteScalar();
             string sumE = sumEObj.ToString(); //Переменная, хранящая сумму обязательных трат
             float sumRem; //Переменная суммы остатка до конца месяца
@@ -111,6 +132,7 @@ namespace Tinkoff_Бюджет
             //Вывод суммы денег на день в label
             double sumInD = Math.Round(sumRem / 31, 2);
             labelInDNumber.Text = sumInD.ToString();
+            #endregion
         }
 
         /*
@@ -119,9 +141,6 @@ namespace Tinkoff_Бюджет
         //Добавить
         private void bttnAdd_Click(object sender, EventArgs e)
         {
-            dateTimeP.Value = DateTime.Now;
-            dateTimeP.MaxDate = DateTime.Now;
-
             tbName.Text = default;
             tbSum.Text = default;
 
@@ -173,17 +192,17 @@ namespace Tinkoff_Бюджет
         private void bttnDelete_Click(object sender, EventArgs e)
         {
             if (dataTableIncome.SelectedRows.Count == 1) {
-                MySqlCommand cDel = new MySqlCommand("DELETE FROM доход WHERE `" + dataTableIncome.Columns[0].HeaderText + "` = '" + dataTableIncome.SelectedRows[0].Cells[0].Value.ToString() + "'", connection);
+                MySqlCommand cDel = new MySqlCommand("DELETE FROM доход WHERE `" + dataTableIncome.Columns[0].HeaderText + "` = '" + dataTableIncome.SelectedRows[0].Cells[0].Value.ToString() + "'", frmStart.connection);
                 cDel.ExecuteNonQuery();
                 bttnReload_Click(sender, e);
             }
             else if (dataTableOExpenses.SelectedRows.Count == 1) {
-                MySqlCommand cDel = new MySqlCommand("DELETE FROM траты WHERE `" + dataTableOExpenses.Columns[0].HeaderText + "` = '" + dataTableOExpenses.SelectedRows[0].Cells[0].Value.ToString() + "'", connection);
+                MySqlCommand cDel = new MySqlCommand("DELETE FROM траты WHERE `" + dataTableOExpenses.Columns[0].HeaderText + "` = '" + dataTableOExpenses.SelectedRows[0].Cells[0].Value.ToString() + "'", frmStart.connection);
                 cDel.ExecuteNonQuery();
                 bttnReload_Click(sender, e);
             }
             else if (dataTableExpenses.SelectedRows.Count == 1) {
-                MySqlCommand cDel = new MySqlCommand("DELETE FROM траты WHERE `" + dataTableExpenses.Columns[0].HeaderText + "` = '" + dataTableExpenses.SelectedRows[0].Cells[0].Value.ToString() + "'", connection);
+                MySqlCommand cDel = new MySqlCommand("DELETE FROM траты WHERE `" + dataTableExpenses.Columns[0].HeaderText + "` = '" + dataTableExpenses.SelectedRows[0].Cells[0].Value.ToString() + "'", frmStart.connection);
                 cDel.ExecuteNonQuery();
                 bttnReload_Click(sender, e);
             }
@@ -271,7 +290,7 @@ namespace Tinkoff_Бюджет
             tbName.Text = default;
             tbSum.Text = default;
 
-            radioBttnIncome = default;
+            radioBttnIncome.Checked = default;
             radioBttnOExpenses.Checked = default;
             radioBttnExpenses.Checked = default;
 
@@ -306,6 +325,7 @@ namespace Tinkoff_Бюджет
                     Income.ConditionIncome = "Добавить";
                     Income.NameIncome = tbName.Text;
                     Income.SumIncome = tbSum.Text;
+                    Income.UserID = userID;
                     Income.SQLRequestIncome();
 
                     panelYellow.Width = 185;
@@ -318,6 +338,7 @@ namespace Tinkoff_Бюджет
                     OExpenses.ConditionOExpenses = "Добавить";
                     OExpenses.NameOExpenses = tbName.Text;
                     OExpenses.SumOExpenses = tbSum.Text;
+                    OExpenses.UserID = userID;
                     OExpenses.SQLRequestOExpenses();
 
                     panelYellow.Width = 185;
@@ -331,6 +352,7 @@ namespace Tinkoff_Бюджет
                     Expenses.NameExpenses = tbName.Text;
                     Expenses.SumExpenses = tbSum.Text;
                     Expenses.DateExpenses = dateTimeP.Value.ToString("yyyy-MM-dd");
+                    Expenses.UserID = userID;
                     Expenses.SQLRequestExpenses();
 
                     panelYellow.Width = 185;
